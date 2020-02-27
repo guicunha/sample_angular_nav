@@ -1,0 +1,39 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <!-- Transaction Menu   -->
+      <a mat-list-item (click)="toggleMenu('menu3')">
+        <mat-icon mat-list-icon>business</mat-icon>Menu Item 3
+        <mat-icon *ngIf="!showMenu">chevron_right</mat-icon>
+        <mat-icon *ngIf="showMenu">expand_more</mat-icon>
+      </a>
+      <mat-nav-list class="sidenav-submenu" *ngIf="showMenu3">
+        <a mat-list-item routerLink="/dashboard/home"> Submenu Item 1</a>
+        <a mat-list-item > Submenu Item 2</a>
+        <a mat-list-item > Submenu Item 3</a>
+        <a mat-list-item > Submenu Item 4</a>
+        <a mat-list-item > Submenu Item 5</a>
+        <a mat-list-item > Submenu Item 6</a>
+      </mat-nav-list>
+      <a mat-list-item routerLink="/dashboard/reports">Link 2</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>projeto-teste</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
